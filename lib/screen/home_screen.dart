@@ -53,7 +53,15 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               showSearch(context: context, delegate: SearchCharacter());
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () {
+              apiProvider.toggleTheme();
+            },
+            icon: apiProvider.theme == ThemeData.light()
+                ? const Icon(Icons.radio_button_on)
+                : const Icon(Icons.radio_button_off),
           ),
         ],
       ),

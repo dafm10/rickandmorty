@@ -7,6 +7,8 @@ class ApiProvider with ChangeNotifier {
   final url = 'rickandmortyapi.com';
   List<Character> characters = [];
   List<Episode> episodes = [];
+  ThemeData _theme = ThemeData.light();
+  ThemeData get theme => _theme;
 
   Future<void> getCharacters(int page) async {
     final results = await http.get(Uri.https(url, "/api/character", {
@@ -33,5 +35,15 @@ class ApiProvider with ChangeNotifier {
       notifyListeners();
     }
     return episodes;
+  }
+
+  void toggleTheme() {
+    final isDark = _theme == ThemeData.dark();
+    if (isDark) {
+      _theme = ThemeData.light();
+    } else {
+      _theme = ThemeData.dark();
+    }
+    notifyListeners();
   }
 }

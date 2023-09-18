@@ -37,15 +37,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ApiProvider(),
-      child: MaterialApp.router(
-        title: 'Rick and Morty App',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          useMaterial3: true,
-        ),
-        routerConfig: _router,
-      ),
+      builder: (context, child) {
+        final provider = Provider.of<ApiProvider>(context);
+        return MaterialApp.router(
+          title: 'Rick and Morty App',
+          debugShowCheckedModeBanner: false,
+          theme: provider.theme,
+          routerConfig: _router,
+        );
+      },
+      // child: MaterialApp.router(
+      //   title: 'Rick and Morty App',
+      //   debugShowCheckedModeBanner: false,
+      //   theme: ThemeData(
+      //     brightness: Brightness.dark,
+      //     useMaterial3: true,
+      //   ),
+      //   routerConfig: _router,
+      // ),
     );
   }
 }
